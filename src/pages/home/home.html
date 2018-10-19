@@ -1,14 +1,54 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Ionic Blank
+      Ionic Media Capture
     </ion-title>
   </ion-navbar>
 </ion-header>
+ 
+<ion-content>
+  <ion-row>
+    <ion-col>
+      <button ion-button full (click)="captureAudio()">Capture Audio</button>
+    </ion-col>
+    <ion-col>
+      <button ion-button full (click)="captureVideo()">Capture Video</button>
+    </ion-col>
+  </ion-row>
 
-<ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+  <ion-content>
+    <ion-row>
+      <ion-col>
+        <button ion-button full (click)="captureFile(1)">Play</button>
+      </ion-col>
+      <ion-col>
+        <button ion-button full (click)="captureFile2(2)">Play2</button>
+      </ion-col>
+    </ion-row>
+
+    <ion-list>
+      <ion-item *ngFor="let audiofile of tracks" tappable  text-wrap>
+        {{ audiofile.name }}
+      
+        <button ion-button (click)="vplus(audiofile)">increase</button>
+        <button ion-button  (click)="vminus(audiofile)">decrease</button>
+        <button ion-button icon-start (click)="stop(audiofile)">
+          <ion-icon name="hand"></ion-icon>
+         Stop
+        </button>
+        <button ion-button icon-start (click)="pop(audiofile)">
+          <ion-icon name="backspace"></ion-icon>
+         pop
+        </button>
+      </ion-item>
+    </ion-list>
+  <ion-list>
+    <ion-item *ngFor="let file of mediaFiles" tappable (click)="play(file)" text-wrap>
+      {{ file.name }}
+      <p>{{ file.size / 1000 / 1000 | number }} MB</p>
+    </ion-item>
+  </ion-list>
+ 
+  <video controls autoplay #myvideo>
+  </video>
 </ion-content>
